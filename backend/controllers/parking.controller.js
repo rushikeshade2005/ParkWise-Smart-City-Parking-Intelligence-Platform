@@ -74,3 +74,37 @@ export const getAllParkingAreas = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+/**
+ * @desc    Get nearby parking areas (Location based search)
+ * @route   GET /api/parking/nearby
+ * @access  Public / User
+ */
+export const getNearbyParkingAreas = async (req, res) => {
+  try {
+    const { latitude, longitude, radius = 5 } = req.query;
+
+    if (!latitude || !longitude) {
+      return res.status(400).json({
+        message: "Latitude and longitude are required",
+      });
+    }
+
+    const parkingAreas = await ParkingArea.find({
+      location: {
+        $nearSphere: {
+          $geometry: {
+            type: "Point",
+            coordinates: [Number(longitude), Number(latitude)],
+          },
+          $maxDistance: radius * 1000, // km → meters
+        },
+      },
+      isActive: true,
+    });
+
+    res.json(parkingAreas);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
