@@ -3,6 +3,7 @@ import {
   createParkingArea,
   addParkingSlots,
   getAllParkingAreas,
+  getNearbyParkingAreas,
 } from "../controllers/parking.controller.js";
 
 import { protect } from "../middlewares/auth.middleware.js";
@@ -10,7 +11,9 @@ import { authorize } from "../middlewares/role.middleware.js";
 
 const router = express.Router();
 
-// Admin routes
+// ================= ADMIN ROUTES =================
+
+// Add new parking area
 router.post(
   "/area",
   protect,
@@ -18,6 +21,7 @@ router.post(
   createParkingArea
 );
 
+// Add parking slots
 router.post(
   "/slots",
   protect,
@@ -25,7 +29,12 @@ router.post(
   addParkingSlots
 );
 
-// Public/User route
+// ================= USER / PUBLIC ROUTES =================
+
+// Get all parking areas
 router.get("/areas", getAllParkingAreas);
+
+// 🔥 Get nearby parking areas (MAP BASED SEARCH)
+router.get("/nearby", getNearbyParkingAreas);
 
 export default router;
