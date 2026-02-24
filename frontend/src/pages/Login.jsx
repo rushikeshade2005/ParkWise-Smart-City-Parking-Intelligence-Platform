@@ -1,6 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Login = () => {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    // TEMP MOCK (backend later)
+    login("fake-jwt-token", { name: "Rushikesh", role: "USER" });
+    navigate("/");
+  };
+
   return (
     <div className="flex justify-center items-center min-h-[70vh]">
       <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
@@ -8,19 +18,13 @@ const Login = () => {
           Login to ParkWise
         </h2>
 
-        <input
-          type="email"
-          placeholder="Email"
-          className="w-full mb-4 p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500"
-        />
+        <input type="email" placeholder="Email" className="input" />
+        <input type="password" placeholder="Password" className="input" />
 
-        <input
-          type="password"
-          placeholder="Password"
-          className="w-full mb-6 p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500"
-        />
-
-        <button className="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700">
+        <button
+          onClick={handleLogin}
+          className="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700"
+        >
           Login
         </button>
 
