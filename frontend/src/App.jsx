@@ -6,6 +6,7 @@ import ParkingDetails from "./pages/ParkingDetails";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import MyBookings from "./pages/MyBookings";
+import AdminDashboard from "./pages/AdminDashboard";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/my-bookings" element={<MyBookings />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
       </Routes>
     </BrowserRouter>
   );
