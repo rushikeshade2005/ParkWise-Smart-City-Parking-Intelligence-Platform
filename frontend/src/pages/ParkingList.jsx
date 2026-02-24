@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ParkingCard from "../components/ParkingCard";
+import ParkingMap from "../components/ParkingMap.jsx";
 import { getAllParkings } from "../services/parking.service";
 
 const ParkingList = () => {
@@ -21,14 +22,18 @@ const ParkingList = () => {
   }
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold text-indigo-600 mb-6">
+    <div className="space-y-6">
+      <h1 className="text-3xl font-bold text-indigo-600">
         Available Parking Areas
       </h1>
 
+      {/* 🗺️ MAP SHOWING NEARBY PARKINGS (LIFETIME FREE) */}
+      <ParkingMap parkings={parkings} />
+
+      {/* 📦 PARKING CARDS */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {parkings.map((parking) => (
-          <ParkingCard key={parking.id} parking={parking} />
+          <ParkingCard key={parking._id} parking={parking} />
         ))}
       </div>
     </div>
