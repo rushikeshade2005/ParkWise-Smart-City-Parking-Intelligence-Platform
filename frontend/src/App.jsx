@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 
 import ParkingList from "./pages/ParkingList";
@@ -11,7 +11,7 @@ import AdminCreateParking from "./pages/AdminCreateParking";
 
 function App() {
   return (
-    <BrowserRouter>
+    <>
       <Navbar />
       <Routes>
         <Route path="/" element={<ParkingList />} />
@@ -20,9 +20,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/my-bookings" element={<MyBookings />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
-        <Route path="/admin/create-parking" element={<AdminCreateParking />}/>
+        <Route path="/admin/create-parking" element={<AdminCreateParking />} />
       </Routes>
-    </BrowserRouter>
+    </>
   );
 }
 

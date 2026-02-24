@@ -3,71 +3,32 @@ import bcrypt from "bcryptjs";
 
 const userSchema = new mongoose.Schema(
   {
-    name: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-      lowercase: true,
-      trim: true,
-    },
-
-    phone: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    phone: { type: String },
     password: {
       type: String,
       required: true,
-      minlength: 6,
-      select: false, // password will not be returned by default
+      select: false,
     },
-
     role: {
       type: String,
-      enum: ["USER", "PARKING_ADMIN", "CITY_ADMIN"],
-      default: "USER",
-    },
-
-    isActive: {
-      type: Boolean,
-      default: true,
-    },
-
-    lastLogin: {
-      type: Date,
+      enum: ["user", "admin"],
+      default: "user",
     },
   },
-  {
-    timestamps: true, // createdAt & updatedAt
-  }
+  { timestamps: true }
 );
 
-/**
- * 🔐 Hash password before saving user
- */
-userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next();
-
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
-  next();
+// ✅ CORRECT: async middleware WITHOUT next
+userSchema.pre("save", async function () {
+  if (!this.isModified("password")) return;
+  this.password = await bcrypt.hash(this.password, 10);
 });
 
-/**
- * 🔑 Compare entered password with hashed password
- */
+// ✅ password compare method
 userSchema.methods.comparePassword = async function (enteredPassword) {
-  return await bcrypt.compare(enteredPassword, this.password);
+  return bcrypt.compare(enteredPassword, this.password);
 };
 
-const User = mongoose.model("User", userSchema);
-
-export default User;
+export default mongoose.model("User", userSchema);
