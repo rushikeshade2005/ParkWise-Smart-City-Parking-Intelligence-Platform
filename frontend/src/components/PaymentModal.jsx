@@ -1,4 +1,4 @@
-const PaymentModal = ({ open, onClose, onConfirm, loading }) => {
+const PaymentModel = ({ open, onClose, onConfirm, loading }) => {
   if (!open) return null;
 
   return (
@@ -30,4 +30,4 @@ const PaymentModal = ({ open, onClose, onConfirm, loading }) => {
   );
 };
 
-export default PaymentModal;
+export default PaymentModel;
