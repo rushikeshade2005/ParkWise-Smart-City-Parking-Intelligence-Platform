@@ -7,6 +7,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import MyBookings from "./pages/MyBookings";
 import AdminDashboard from "./pages/AdminDashboard";
+import AdminCreateParking from "./pages/AdminCreateParking";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/my-bookings" element={<MyBookings />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/create-parking" element={<AdminCreateParking />}/>
       </Routes>
     </BrowserRouter>
   );
