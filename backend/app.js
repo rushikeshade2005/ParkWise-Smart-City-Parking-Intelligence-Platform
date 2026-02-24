@@ -6,6 +6,7 @@ import parkingRoutes from "./routes/parking.routes.js";
 import paymentRoutes from "./routes/payment.routes.js";
 import bookingRoutes from "./routes/booking.routes.js";
 import analyticsRoutes from "./routes/analytics.routes.js";
+import reviewRoutes from "./routes/review.routes.js";
 
 const app = express();
 
@@ -17,17 +18,14 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/parking", parkingRoutes);
 app.use("/api/bookings", bookingRoutes);
-app.use("/api/payments", paymentRoutes); //
+app.use("/api/payments", paymentRoutes); 
 app.use("/api/analytics", analyticsRoutes);
+app.use("/api/reviews", reviewRoutes);
 
 
 // Health check
 app.get("/", (req, res) => {
   res.send("ParkWise API is running");
-});
-
-app.get("/debug-payments", (req, res) => {
-  res.send("Payments routes are connected");
 });
 
 export default app;

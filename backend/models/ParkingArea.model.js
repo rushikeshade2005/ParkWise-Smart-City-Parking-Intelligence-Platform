@@ -66,6 +66,16 @@ const parkingAreaSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+  },
+  {
+    averageRating: {
+      type: Number,
+      default: 0,
+    },
+    totalReviews: {
+      type: Number,
+      default: 0,
+    },
   }
 );
 
