@@ -7,7 +7,7 @@ const Login = () => {
         <h2 className="text-2xl font-bold text-center mb-6 text-indigo-600">
           Login to ParkWise
         </h2>
-
+        
         <input
           type="email"
           placeholder="Email"
