@@ -7,6 +7,7 @@ import paymentRoutes from "./routes/payment.routes.js";
 import bookingRoutes from "./routes/booking.routes.js";
 import analyticsRoutes from "./routes/analytics.routes.js";
 import reviewRoutes from "./routes/review.routes.js";
+import reportRoutes from "./routes/report.routes.js";
 
 const app = express();
 
@@ -21,6 +22,8 @@ app.use("/api/bookings", bookingRoutes);
 app.use("/api/payments", paymentRoutes); 
 app.use("/api/analytics", analyticsRoutes);
 app.use("/api/reviews", reviewRoutes);
+app.use("/api/reports", reportRoutes);
+
 
 
 // Health check
