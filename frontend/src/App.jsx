@@ -1,22 +1,18 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import MainLayout from "./layouts/MainLayout";
-
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import Navbar from "./components/Navbar";
 import ParkingList from "./pages/ParkingList";
+import ParkingDetails from "./pages/ParkingDetails";
+import Register from "./pages/Register";
 
 function App() {
   return (
     <BrowserRouter>
-      <MainLayout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/parkings" element={<ParkingList />} />
-        </Routes>
-      </MainLayout>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<ParkingList />} />
+        <Route path="/parkings/:id" element={<ParkingDetails />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
     </BrowserRouter>
   );
 }
