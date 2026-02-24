@@ -16,11 +16,16 @@ export const confirmPayment = async (req, res) => {
       return res.status(404).json({ message: "Booking not found" });
     }
 
+    // Prevent double payment
+    if (booking.paymentStatus === "PAID") {
+      return res.status(400).json({ message: "Booking already paid" });
+    }
+
     // Create dummy payment record
     const payment = await Payment.create({
       booking: booking._id,
       user: booking.user,
-      amount: booking.totalAmount,
+      amount: booking.totalPrice,
       paymentMethod: "UPI_QR",
       paymentStatus: "SUCCESS",
     });
@@ -30,12 +35,14 @@ export const confirmPayment = async (req, res) => {
     booking.bookingStatus = "CONFIRMED";
     await booking.save();
 
-    // Update slot
+    // Update slot availability
     const slot = await ParkingSlot.findById(booking.parkingSlot);
-    slot.status = "OCCUPIED";
-    await slot.save();
+    if (slot) {
+      slot.isAvailable = false;
+      await slot.save();
+    }
 
-    res.json({
+    res.status(200).json({
       message: "Payment successful, booking confirmed",
       payment,
     });
