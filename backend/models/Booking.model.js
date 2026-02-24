@@ -69,6 +69,16 @@ const bookingSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+  },
+  {
+    pricePerHour: {
+      type: Number,
+      required: true,
+    },
+    totalAmount: {
+      type: Number,
+      required: true,
+    },
   }
 );
 
